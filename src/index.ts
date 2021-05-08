@@ -33,8 +33,15 @@ export default function tscPlugin(): Plugin {
           })
 
           tsc.once("exit", (tscExitCode) => {
+            // success
             if (tscExitCode === null || tscExitCode === 0) return
 
+            // bail now because it may not be a compile error
+            if (tscExitCode === 1) {
+              process.exit(tscExitCode)
+            }
+
+            // awaits build finish
             process.once("exit", () => {
               console.error("Compile failed")
               process.exit(tscExitCode)
@@ -46,6 +53,14 @@ export default function tscPlugin(): Plugin {
         case "serve": {
           tsc = spawn("npx", [...tscCommand, "--watch"], {
             stdio: "inherit",
+          })
+
+          tsc.once("exit", (tscExitCode) => {
+            // success
+            if (tscExitCode === null || tscExitCode === 0) return
+
+            // bail now because it may not be a compile error
+            process.exit(tscExitCode)
           })
           break
         }
