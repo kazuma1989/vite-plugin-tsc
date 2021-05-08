@@ -1,6 +1,5 @@
-/// <reference lib="es2019" />
-
-import { spawn } from "child_process"
+import { ChildProcessWithoutNullStreams, spawn } from "child_process"
+import { Plugin, ResolvedConfig } from "vite"
 
 /**
  * @example
@@ -12,13 +11,10 @@ import { spawn } from "child_process"
  *   // Not required, but recommended.
  *   logLevel: "silent",
  * }
- * @returns {import("vite").Plugin} Vite plugin
  */
-export default function VitePluginTsc() {
-  /** @type {"build" | "serve"} */
-  let command
-  /** @type {import("child_process").ChildProcess} */
-  let tsc
+export default function VitePluginTsc(): Plugin {
+  let command: ResolvedConfig["command"]
+  let tsc: ChildProcessWithoutNullStreams
 
   return {
     name: "vite-plugin-tsc",

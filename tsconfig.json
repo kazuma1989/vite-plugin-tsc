@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "declaration": true,
+
+    "target": "ES2019",
+    "lib": ["ES2019"],
+    "moduleResolution": "Node",
+    "module": "CommonJS",
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true
+  },
+
+  "include": ["./src/**/*"]
+}
