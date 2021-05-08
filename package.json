@@ -1,0 +1,14 @@
+{
+  "name": "vite-plugin-tsc",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "vite-plugin"
+  ],
+  "author": "kazuma1989 <kazuma1989@quipper.com>",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
