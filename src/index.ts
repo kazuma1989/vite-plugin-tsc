@@ -13,20 +13,20 @@ import { Plugin, ResolvedConfig } from "vite"
  * }
  */
 export default function tscPlugin(): Plugin {
-  let command: ResolvedConfig["command"]
+  let viteCommand: ResolvedConfig["command"]
   let tsc: ChildProcessWithoutNullStreams
 
   return {
     name: "vite-plugin-tsc",
 
     configResolved(config) {
-      command = config.command
+      viteCommand = config.command
     },
 
     buildStart() {
       const tscCommand = ["tsc", "--pretty", "--noEmit"]
 
-      switch (command) {
+      switch (viteCommand) {
         case "build": {
           tsc = spawn("npx", tscCommand)
 
@@ -53,7 +53,7 @@ export default function tscPlugin(): Plugin {
     buildEnd() {
       if (!tsc) return
 
-      switch (command) {
+      switch (viteCommand) {
         case "build": {
           // do nothing
           break
