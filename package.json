@@ -1,11 +1,17 @@
 {
   "name": "vite-plugin-tsc",
   "version": "0.0.2",
-  "description": "",
+  "description": "A Vite plugin which spawns a `tsc --watch` process with Vite dev server.",
   "keywords": [
+    "typescript",
+    "vite",
     "vite-plugin"
   ],
   "author": "kazuma1989 <kazuma1989@quipper.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kazuma1989/vite-plugin-tsc"
+  },
   "license": "GPL-3.0-or-later",
   "engines": {
     "node": ">=12.0.0"
@@ -26,6 +32,7 @@
     "vite": "^2.2.4"
   },
   "peerDependencies": {
-    "typescript": ">=1.0.0"
+    "typescript": ">=1.0.0",
+    "vite": ">=2.0.0"
   }
 }
