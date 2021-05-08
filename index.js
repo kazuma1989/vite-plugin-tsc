@@ -2,7 +2,18 @@
 
 import { spawn } from "child_process"
 
-/** @returns {import("vite").Plugin} */
+/**
+ * @example
+ * import VitePluginTsc from "vite-plugin-tsc"
+ *
+ * export default {
+ *   plugins: [VitePluginTsc()],
+ *
+ *   // Not required, but recommended.
+ *   logLevel: "silent",
+ * }
+ * @returns {import("vite").Plugin} Vite plugin
+ */
 export default function VitePluginTsc() {
   /** @type {"build" | "serve"} */
   let command
