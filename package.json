@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-tsc",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
   "keywords": [
     "vite-plugin"
@@ -10,8 +10,15 @@
   "engines": {
     "node": ">=12.0.0"
   },
+  "files": [
+    "index.js"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.20.12",
+    "vite": "^2.2.4"
   }
 }
