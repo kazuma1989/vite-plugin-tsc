@@ -3,16 +3,16 @@ import { Plugin, ResolvedConfig } from "vite"
 
 /**
  * @example
- * import VitePluginTsc from "vite-plugin-tsc"
+ * import tscPlugin from "vite-plugin-tsc"
  *
  * export default {
- *   plugins: [VitePluginTsc()],
+ *   plugins: [tscPlugin()],
  *
  *   // Not required, but recommended.
  *   logLevel: "silent",
  * }
  */
-export default function VitePluginTsc(): Plugin {
+export default function tscPlugin(): Plugin {
   let command: ResolvedConfig["command"]
   let tsc: ChildProcessWithoutNullStreams
 

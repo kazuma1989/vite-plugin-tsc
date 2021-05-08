@@ -11,11 +11,11 @@ npm install -D vite-plugin-tsc
 ```js
 // vite.config.js
 
-import VitePluginTsc from "vite-plugin-tsc"
+import tscPlugin from "vite-plugin-tsc"
 
 /** @type {import("vite").UserConfig} */
 const config = {
-  plugins: [VitePluginTsc()],
+  plugins: [tscPlugin()],
 
   // Not required, but recommended.
   logLevel: "silent",
