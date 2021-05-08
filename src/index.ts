@@ -29,6 +29,14 @@ export default function tscPlugin(): Plugin {
       switch (command) {
         case "build": {
           tsc = spawn("npx", tscCommand)
+
+          tsc.stdout.once("data", () => {
+            process.once("exit", () => {
+              console.error("Compile failed")
+
+              process.exit(1)
+            })
+          })
           break
         }
 
