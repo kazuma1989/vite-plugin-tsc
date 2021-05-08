@@ -1,4 +1,4 @@
-import { ChildProcessWithoutNullStreams, spawn } from "child_process"
+import { ChildProcess, spawn } from "child_process"
 import { Plugin, ResolvedConfig } from "vite"
 
 /**
@@ -14,7 +14,7 @@ import { Plugin, ResolvedConfig } from "vite"
  */
 export default function tscPlugin(): Plugin {
   let viteCommand: ResolvedConfig["command"]
-  let tsc: ChildProcessWithoutNullStreams
+  let tsc: ChildProcess
 
   return {
     name: "vite-plugin-tsc",
@@ -28,26 +28,28 @@ export default function tscPlugin(): Plugin {
 
       switch (viteCommand) {
         case "build": {
-          tsc = spawn("npx", tscCommand)
+          tsc = spawn("npx", tscCommand, {
+            stdio: "inherit",
+          })
 
-          tsc.stdout.once("data", () => {
+          tsc.once("exit", (tscExitCode) => {
+            if (tscExitCode === null || tscExitCode === 0) return
+
             process.once("exit", () => {
               console.error("Compile failed")
-
-              process.exit(1)
+              process.exit(tscExitCode)
             })
           })
           break
         }
 
         case "serve": {
-          tsc = spawn("npx", [...tscCommand, "--watch"])
+          tsc = spawn("npx", [...tscCommand, "--watch"], {
+            stdio: "inherit",
+          })
           break
         }
       }
-
-      tsc.stdout.pipe(process.stdout)
-      tsc.stderr.pipe(process.stderr)
     },
 
     buildEnd() {
