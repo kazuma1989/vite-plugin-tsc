@@ -28,14 +28,16 @@ export default function VitePluginTsc() {
     },
 
     buildStart() {
+      const tscCommand = ["tsc", "--pretty", "--noEmit"]
+
       switch (command) {
         case "build": {
-          tsc = spawn("npx", ["tsc", "--pretty"])
+          tsc = spawn("npx", tscCommand)
           break
         }
 
         case "serve": {
-          tsc = spawn("npx", ["tsc", "--pretty", "--watch"])
+          tsc = spawn("npx", [...tscCommand, "--watch"])
           break
         }
       }
