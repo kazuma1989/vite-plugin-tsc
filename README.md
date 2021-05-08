@@ -10,7 +10,6 @@ npm install -D vite-plugin-tsc
 
 ```js
 // vite.config.js
-
 import tscPlugin from "vite-plugin-tsc"
 
 /** @type {import("vite").UserConfig} */
