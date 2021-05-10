@@ -24,6 +24,8 @@ export default function tscPlugin(): Plugin {
     },
 
     buildStart() {
+      if (tsc) return
+
       const tscCommand = ["tsc", "--pretty", "--noEmit"]
 
       switch (viteCommand) {
