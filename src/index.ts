@@ -26,14 +26,9 @@ export default function tscPlugin(): Plugin {
     buildStart() {
       if (tsc) return
 
-      const tscCommand = ["tsc", "--pretty", "--noEmit"]
-
       switch (viteCommand) {
         case "build": {
-          tsc = spawn("npx", tscCommand, {
-            stdio: "inherit",
-            shell: process.platform === "win32",
-          })
+          tsc = spawnTsc()
 
           tsc.once("exit", (tscExitCode) => {
             // success
@@ -54,10 +49,7 @@ export default function tscPlugin(): Plugin {
         }
 
         case "serve": {
-          tsc = spawn("npx", [...tscCommand, "--watch"], {
-            stdio: "inherit",
-            shell: process.platform === "win32",
-          })
+          tsc = spawnTsc("--watch")
 
           tsc.once("exit", (tscExitCode) => {
             // success
@@ -87,4 +79,16 @@ export default function tscPlugin(): Plugin {
       }
     },
   }
+}
+
+/**
+ * @example
+ * spawnTsc()           // npx tsc --pretty --noEmit
+ * spawnTsc("--watch")  // npx tsc --pretty --noEmit --watch
+ */
+function spawnTsc(...args: string[]): ChildProcess {
+  return spawn("npx", ["tsc", "--pretty", "--noEmit", ...args], {
+    stdio: "inherit",
+    shell: process.platform === "win32",
+  })
 }
