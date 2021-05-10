@@ -32,6 +32,7 @@ export default function tscPlugin(): Plugin {
         case "build": {
           tsc = spawn("npx", tscCommand, {
             stdio: "inherit",
+            shell: process.platform === "win32",
           })
 
           tsc.once("exit", (tscExitCode) => {
@@ -55,6 +56,7 @@ export default function tscPlugin(): Plugin {
         case "serve": {
           tsc = spawn("npx", [...tscCommand, "--watch"], {
             stdio: "inherit",
+            shell: process.platform === "win32",
           })
 
           tsc.once("exit", (tscExitCode) => {
