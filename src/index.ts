@@ -13,8 +13,8 @@ import { Plugin, ResolvedConfig } from "vite"
  * }
  */
 export default function tscPlugin(): Plugin {
-  let viteCommand: ResolvedConfig["command"]
-  let tsc: ChildProcess
+  let viteCommand: ResolvedConfig["command"] | undefined
+  let tsc: ChildProcess | undefined
 
   return {
     name: "vite-plugin-tsc",
@@ -38,7 +38,7 @@ export default function tscPlugin(): Plugin {
             // success
             if (tscExitCode === null || tscExitCode === 0) return
 
-            // bail now because it may not be a compile error
+            // bail now because it may not be a compile error but cli error
             if (tscExitCode === 1) {
               process.exit(tscExitCode)
             }
